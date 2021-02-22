@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'setting_store.dart';
-import './../main_store.dart';
+import 'index_store.dart';
+import './../ws_store.dart';
 
 class SettingPage extends StatelessWidget {
   @override
@@ -30,15 +30,10 @@ class SettingPage extends StatelessWidget {
                   contentPadding: EdgeInsets.all(10),
                   labelText: 'IP',
                   prefix: Text('http://'),
-//                  border: OutlineInputBorder(
-//                    borderSide: BorderSide(
-//                      color: Colors.blue
-//                    )
-//                  )
                 ),
                 onChanged: settingStore.ipChange,
                 keyboardType: TextInputType.numberWithOptions(decimal: true),
-                enabled: !mainStore.connected,
+                enabled: !wsStore.connected,
               )
             ),
             Container(
@@ -58,25 +53,20 @@ class SettingPage extends StatelessWidget {
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.all(10),
                         labelText: 'PORT',
-//                        border: OutlineInputBorder(
-//                          borderSide: BorderSide(
-//                            color: Colors.blue
-//                          )
-//                        )
                       ),
                       onChanged: settingStore.portChange,
                       keyboardType: TextInputType.number,
-                      enabled: !mainStore.connected,
+                      enabled: !wsStore.connected,
                     ),
                   ),
                   Container(
                     child: MaterialButton(
-                      child: Text(mainStore.connected ? 'disconnect' : 'connect'),
-                      color: mainStore.connected ? Colors.red : Colors.blue,
+                      child: Text(wsStore.connected ? 'disconnect' : 'connect'),
+                      color: wsStore.connected ? Colors.red : Colors.blue,
                       onPressed: () {
                         ipFocusNode.unfocus();
                         portFocusNode.unfocus();
-                        settingStore.connectToggle();
+                        wsStore.connectToggle();
                       },
                     )
                   )

@@ -17,10 +17,6 @@ abstract class _MainStore with Store {
   @observable
   int currentIndex = 0;
 
-  //连接状态
-  @observable
-  bool connected = false;
-
   @action
   void pageChange(index) {
     List<String> titleList = [
