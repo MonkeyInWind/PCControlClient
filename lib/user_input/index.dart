@@ -5,18 +5,66 @@ import 'index_store.dart';
 class UserInputPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
+    FocusNode inputFocusNode = new FocusNode();
+    
     return Scaffold(
         body: Flex(
             direction: Axis.vertical,
             children: [
+              Container(
+                padding: EdgeInsets.all(10),
+                child: Flex(
+                  direction: Axis.horizontal,
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: TextField(
+                        focusNode: inputFocusNode,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.all(10),
+                          labelText: 'Message',
+                        ),
+                        enabled: wsStore.connected,
+                        onChanged: (v) {
+                        
+                        }
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(
+                        left: 10,
+                        right: 10
+                      ),
+                      child: MaterialButton(
+                        color: Colors.blue,
+                        child: Text('send'),
+                        onPressed: () {
+                          inputFocusNode.unfocus();
+                        },
+                      ),
+                    ),
+                    Container(
+                      child: MaterialButton(
+                        color: Colors.blue,
+                        child: Text('Enter'),
+                        onPressed: () {
+                          inputFocusNode.unfocus();
+                        }
+                      )
+                    )
+                  ]
+                )
+              ),
               Expanded(
                   flex: 1,
                   child: Listener(
                     child: InkWell(
                         child: Container(
-                          color: Colors.cyanAccent,
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(50, 0, 0, 0)
+                          ),
                         ),
-                        radius: 90,
+                        radius: 30,
                         onTap: () {
                           if (!wsStore.connected) return;
                           userInputStore.userAction({
@@ -37,6 +85,7 @@ class UserInputPage extends StatelessWidget{
                         }
                     ),
                     onPointerDown: (PointerDownEvent e) {
+                      inputFocusNode.unfocus();
                       if (!wsStore.connected) return;
                       Offset offset = e.position;
                       userInputStore.userAction({
