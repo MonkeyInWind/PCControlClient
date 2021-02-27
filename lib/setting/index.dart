@@ -34,6 +34,16 @@ class SettingPage extends StatelessWidget {
                 onChanged: settingStore.ipChange,
                 keyboardType: TextInputType.numberWithOptions(decimal: true),
                 enabled: !wsStore.connected,
+                controller: TextEditingController.fromValue(
+                  TextEditingValue(
+                    text: settingStore.inputIp,
+                    selection: TextSelection.fromPosition(
+                      TextPosition(
+                        offset: settingStore.inputIp.length
+                      )
+                    )
+                  )
+                ),
               )
             ),
             Container(
@@ -57,6 +67,16 @@ class SettingPage extends StatelessWidget {
                       onChanged: settingStore.portChange,
                       keyboardType: TextInputType.number,
                       enabled: !wsStore.connected,
+                      controller: TextEditingController.fromValue(
+                        TextEditingValue(
+                          text: settingStore.inputPort,
+                          selection: TextSelection.fromPosition(
+                            TextPosition(
+                              offset: settingStore.inputPort.length
+                            )
+                          )
+                        )
+                      ),
                     ),
                   ),
                   Container(
