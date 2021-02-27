@@ -1,69 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:web_socket_channel/io.dart';
-import 'dart:convert';
+import './../ws_store.dart';
+import 'index_store.dart';
 
-class UserInputPage extends StatefulWidget {
-  @override
-  _UserInputState createState() => new _UserInputState();
-}
-
-class _UserInputState extends State<UserInputPage>{
-  var channel;
-  bool connected = false;
-  bool isMoving = false;
-  num prevX = 0;
-  num prevY = 0;
-
+class UserInputPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Flex(
             direction: Axis.vertical,
             children: [
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                        padding: EdgeInsets.only(
-                            left: 10,
-                            right: 10
-                        ),
-                        child: MaterialButton(
-                            child: Text('connect'),
-                            color: Colors.lightBlue,
-                            onPressed: () {
-                              channel = IOWebSocketChannel.connect(Uri.parse('ws://192.168.31.132:8000/ws'));
-                              channel.stream.listen((message) {
-                                print(message);
-                                // channel.sink.add('received!');
-                                // channel.sink.close(status.goingAway);
-                              });
-                              setState(() {
-                                connected = true;
-                              });
-                              print('connected: $connected');
-                            }
-                        )
-                    ),
-                    Container(
-                        padding: EdgeInsets.only(
-                            left: 10,
-                            right: 10
-                        ),
-                        child: MaterialButton(
-                            child: Text('disconnect'),
-                            color: Colors.red,
-                            onPressed: () {
-                              channel.sink.close();
-                              setState(() {
-                                connected = false;
-                              });
-                              print('connected: $connected');
-                            }
-                        )
-                    )
-                  ]
-              ),
               Expanded(
                   flex: 1,
                   child: Listener(
@@ -73,58 +18,59 @@ class _UserInputState extends State<UserInputPage>{
                         ),
                         radius: 90,
                         onTap: () {
-                          if (!connected) return;
-                          print('tap');
-                          channel.sink.add(json.encode({
+                          if (!wsStore.connected) return;
+                          userInputStore.userAction({
                             'operation': 'tap'
-                          }));
+                          });
                         },
                         onDoubleTap: () {
-                          if (!connected) return;
-                          print('double tap');
-                          channel.sink.add(json.encode({
+                          if (!wsStore.connected) return;
+                          userInputStore.userAction({
                             'operation': 'doubleTap'
-                          }));
+                          });
                         },
                         onLongPress: () {
-                          print(isMoving);
-                          if (!connected || isMoving) return;
-                          print('on long press');
-                          channel.sink.add(json.encode({
+                          if (!wsStore.connected || userInputStore.isMoving) return;
+                          userInputStore.userAction({
                             'operation': 'longPress'
-                          }));
+                          });
                         }
                     ),
                     onPointerDown: (PointerDownEvent e) {
-                      if (!connected) return;
+                      if (!wsStore.connected) return;
                       Offset offset = e.position;
-                      prevX = offset.dx;
-                      prevY = offset.dy;
+                      userInputStore.userAction({
+                        'operation': 'pointerDown',
+                        'prev': {
+                          'x': offset.dx,
+                          'y': offset.dy
+                        }
+                      });
                     },
                     onPointerMove: (PointerMoveEvent e) {
-                      if (!connected) return;
+                      if (!wsStore.connected) return;
                       Offset offset = e.position;
-                      num disX = offset.dx - prevX;
-                      num disY = offset.dy - prevY;
+                      num disX = offset.dx - userInputStore.prevX;
+                      num disY = offset.dy - userInputStore.prevY;
                       if (disX == 0 && disY == 0) return;
-                      isMoving = true;
                       var axis = {
                         'disX': disX,
                         'disY': disY
                       };
-                      channel.sink.add(json.encode({
+                      userInputStore.userAction({
                         'operation': 'move',
-                        'axis': axis
-                      }));
-
-                      prevX = offset.dx;
-                      prevY = offset.dy;
+                        'axis': axis,
+                        'prev': {
+                          'x': offset.dx,
+                          'y': offset.dy
+                        }
+                      });
                     },
                     onPointerUp: (PointerUpEvent e) {
-                      isMoving = false;
+                      userInputStore.setMovingStatus(false);
                     },
                     onPointerCancel: (PointerCancelEvent e) {
-                      isMoving = false;
+                      userInputStore.setMovingStatus(false);
                     },
                   )
               )
