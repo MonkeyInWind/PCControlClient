@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'main_store.dart';
+import 'ws_store.dart';
 
 void main() {
   runApp(PCController());
@@ -24,9 +25,13 @@ class MainContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Observer(builder: (_) => Scaffold(
       appBar: AppBar(
+        leading: Icon(
+          wsStore.connected ? Icons.check_circle : Icons.error_outline,
+          color: wsStore.connected ? Colors.greenAccent : Colors.redAccent
+        ),
         title: Title(
           color: Colors.blue,
-          child: Text(mainStore.mainTitle)
+          child: Text(mainStore.mainTitle),
         ),
       ),
       body: mainStore.currentPage,
