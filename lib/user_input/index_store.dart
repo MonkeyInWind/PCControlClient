@@ -10,6 +10,14 @@ abstract class _UserInputStore with Store {
 	num prevX = 0;
 	num prevY = 0;
 	
+	@observable
+	String userInput = '';
+	
+	@action
+	userInputChange(String value) {
+		userInput = value;
+	}
+	
 	@action
 	userAction(Map<String, dynamic> data) {
 		var operation = data['operation'];
@@ -37,6 +45,22 @@ abstract class _UserInputStore with Store {
 	@action
 	setMovingStatus(status) {
 		isMoving = status;
+	}
+	
+	@action
+	sendMessToPc() {
+		wsStore.sendMessage({
+			'operation': 'input',
+			'message': userInput
+		});
+	}
+	
+	@action
+	pressedEnter() {
+		wsStore.sendMessage({
+			'operation': 'keyboard',
+			'keyCode': 'enter'
+		});
 	}
 }
 

@@ -25,9 +25,17 @@ class UserInputPage extends StatelessWidget{
                           labelText: 'Message',
                         ),
                         enabled: wsStore.connected,
-                        onChanged: (v) {
-                        
-                        }
+                        onChanged: userInputStore.userInputChange,
+                        controller: TextEditingController.fromValue(
+                          TextEditingValue(
+                            text: userInputStore.userInput,
+                            selection: TextSelection.fromPosition(
+                              TextPosition(
+                                offset: userInputStore.userInput.length
+                              )
+                            )
+                          )
+                        ),
                       ),
                     ),
                     Container(
@@ -40,6 +48,7 @@ class UserInputPage extends StatelessWidget{
                         child: Text('send'),
                         onPressed: () {
                           inputFocusNode.unfocus();
+                          userInputStore.sendMessToPc();
                         },
                       ),
                     ),
@@ -49,6 +58,7 @@ class UserInputPage extends StatelessWidget{
                         child: Text('Enter'),
                         onPressed: () {
                           inputFocusNode.unfocus();
+                          userInputStore.pressedEnter();
                         }
                       )
                     )
