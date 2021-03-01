@@ -24,9 +24,8 @@ abstract class _WsStore with Store {
 			String address = 'ws://$ip:$port/ws';
 			print(address);
 			channel = IOWebSocketChannel.connect(Uri.parse(address));
-			channel.stream.listen((message) {
-				print(message);
-			});
+			print('connected');
+			channel.stream.listen(onWsMessage, onError: onWsError, onDone: onWsDonw);
 		} else {
 			channel.sink.close();
 		}
@@ -35,6 +34,18 @@ abstract class _WsStore with Store {
 	
 	sendMessage(data) {
 		channel.sink.add(json.encode(data));
+	}
+	
+	onWsMessage(data) {
+		print(data);
+	}
+	
+	onWsError(e) {
+		print(e);
+	}
+	
+	onWsDonw() {
+		print('disconnected');
 	}
 }
 
