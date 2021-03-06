@@ -53,13 +53,14 @@ abstract class _UserInputStore with Store {
 			'operation': 'input',
 			'message': userInput
 		});
+		userInput = '';
 	}
 	
 	@action
 	pressedEnter() {
 		wsStore.sendMessage({
 			'operation': 'keyboard',
-			'keyCode': 'enter'
+			'key': 'enter'
 		});
 	}
 }

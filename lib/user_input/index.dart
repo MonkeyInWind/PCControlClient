@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import './../ws_store.dart';
 import 'index_store.dart';
 
@@ -18,7 +19,7 @@ class UserInputPage extends StatelessWidget{
                   children: [
                     Expanded(
                       flex: 1,
-                      child: TextField(
+                      child: Observer(builder: (_) => TextField(
                         focusNode: inputFocusNode,
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.all(10),
@@ -37,7 +38,7 @@ class UserInputPage extends StatelessWidget{
                           )
                         ),
                       ),
-                    ),
+                    )),
                     Container(
                       padding: EdgeInsets.only(
                         left: 10,
@@ -74,7 +75,6 @@ class UserInputPage extends StatelessWidget{
                             color: Color.fromARGB(50, 0, 0, 0)
                           ),
                         ),
-                        radius: 30,
                         onTap: () {
                           if (!wsStore.connected) return;
                           userInputStore.userAction({
