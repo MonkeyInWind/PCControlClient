@@ -25,7 +25,7 @@ abstract class _WsStore with Store {
 			print(address);
 			channel = IOWebSocketChannel.connect(Uri.parse(address));
 			print('connected');
-			channel.stream.listen(onWsMessage, onError: onWsError, onDone: onWsDonw);
+			channel.stream.listen(onWsMessage, onError: onWsError, onDone: onWsDown);
 		} else {
 			channel.sink.close();
 		}
@@ -37,7 +37,21 @@ abstract class _WsStore with Store {
 	}
 	
 	onWsMessage(data) {
-		print(data);
+		var received = json.decode(data);
+		if (!received['result']) {
+			print(received);
+			return;
+		}
+		
+		var receivedData = received['data'];
+		switch(received['type']) {
+			case 'system_info':
+				String platform = receivedData['platform'];
+				print(platform);
+				break;
+			default:
+				break;
+		}
 	}
 	
 	onWsError(e) {
@@ -45,7 +59,7 @@ abstract class _WsStore with Store {
 	}
 	
 	@action
-	onWsDonw() {
+	onWsDown() {
 		print('disconnected');
 		connected = false;
 	}

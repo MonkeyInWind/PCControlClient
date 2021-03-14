@@ -192,42 +192,57 @@ class UserInputPage extends StatelessWidget{
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
+                      width: 68,
+                      child: MaterialButton(
+                        color: Colors.blue,
+                        child: Text('ctrl+a'),
+                        onPressed: (){
+                          inputFocusNode.unfocus();
+                          userInputStore.pressedHotKey('cmd+a');
+                        },
+                      )
+                    ),
+                    Container(
+                      width: 68,
                       child: MaterialButton(
                         color: Colors.blue,
                         child: Text('ctrl+x'),
                         onPressed: (){
                           inputFocusNode.unfocus();
-                          userInputStore.pressedHotKey('<ctrl>+x');
+                          userInputStore.pressedHotKey('cmd+x');
                         },
                       )
                     ),
                     Container(
+                      width: 68,
                       child: MaterialButton(
                         color: Colors.blue,
                         child: Text('ctrl+c'),
                         onPressed: (){
                           inputFocusNode.unfocus();
-                          userInputStore.pressedHotKey('<ctrl>+c');
+                          userInputStore.pressedHotKey('cmd+c');
                         },
                       )
                     ),
                     Container(
+                      width: 68,
                       child: MaterialButton(
                         color: Colors.blue,
                         child: Text('ctrl+v'),
                         onPressed: (){
                           inputFocusNode.unfocus();
-                          userInputStore.pressedHotKey('<ctrl>+v');
+                          userInputStore.pressedHotKey('cmd+v');
                         },
                       )
                     ),
                     Container(
+                      width: 68,
                       child: MaterialButton(
                         color: Colors.blue,
                         child: Text('ctrl+z'),
                         onPressed: (){
                           inputFocusNode.unfocus();
-                          userInputStore.pressedHotKey('<ctrl>+z');
+                          userInputStore.pressedHotKey('cmd+z');
                         },
                       )
                     ),
