@@ -68,12 +68,21 @@ abstract class _UserInputStore with Store {
 	}
 	
 	@action
-	pressedEnter() {
+	pressedKey(key) {
 		wsStore.sendMessage({
-			'operation': 'keyboard',
-			'key': 'enter'
+			'operation': 'keyboard_press',
+			'key': key
 		});
 	}
+	
+	@action
+	pressedHotKey(key) {
+		wsStore.sendMessage({
+			'operation': 'hot_key_press',
+			'key': key
+		});
+	}
+	
 }
 
 final userInputStore = UserInputStore();

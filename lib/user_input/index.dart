@@ -36,7 +36,7 @@ class UserInputPage extends StatelessWidget{
                               ),
                               child: MaterialButton(
                                 color: Colors.blue,
-                                child: Text('esc'),
+                                child: Icon(Icons.touch_app),
                                 onPressed: (){
                                   inputFocusNode.unfocus();
                                 },
@@ -125,6 +125,7 @@ class UserInputPage extends StatelessWidget{
                               child: Icon(Icons.keyboard_arrow_left),
                               onPressed: () {
                                 inputFocusNode.unfocus();
+                                userInputStore.pressedKey('left');
                               },
                             ),
                           ),
@@ -136,6 +137,7 @@ class UserInputPage extends StatelessWidget{
                                     child: Icon(Icons.keyboard_arrow_up),
                                     onPressed: () {
                                       inputFocusNode.unfocus();
+                                      userInputStore.pressedKey('up');
                                     },
                                   ),
                                 ),
@@ -144,7 +146,7 @@ class UserInputPage extends StatelessWidget{
                                     child: Text('Enter'),
                                     onPressed: () {
                                       inputFocusNode.unfocus();
-                                      userInputStore.pressedEnter();
+                                      userInputStore.pressedKey('enter');
                                     }
                                   )
                                 ),
@@ -153,6 +155,7 @@ class UserInputPage extends StatelessWidget{
                                     child: Icon(Icons.keyboard_arrow_down),
                                     onPressed: () {
                                       inputFocusNode.unfocus();
+                                      userInputStore.pressedKey('down');
                                     },
                                   ),
                                 )
@@ -170,6 +173,7 @@ class UserInputPage extends StatelessWidget{
                               child: Icon(Icons.keyboard_arrow_right),
                               onPressed: () {
                                 inputFocusNode.unfocus();
+                                userInputStore.pressedKey('right');
                               },
                             ),
                           )
@@ -184,40 +188,97 @@ class UserInputPage extends StatelessWidget{
                   left: 10,
                   right: 10
                 ),
-                child: Flex(
-                  direction: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      padding: EdgeInsets.only(
-                        right: 10
-                      ),
                       child: MaterialButton(
                         color: Colors.blue,
-                        child: Icon(Icons.touch_app),
-                        onPressed: () {
+                        child: Text('ctrl+x'),
+                        onPressed: (){
                           inputFocusNode.unfocus();
+                          userInputStore.pressedHotKey('<ctrl>+x');
                         },
                       )
                     ),
-                    Expanded(
-                      flex: 1,
+                    Container(
+                      child: MaterialButton(
+                        color: Colors.blue,
+                        child: Text('ctrl+c'),
+                        onPressed: (){
+                          inputFocusNode.unfocus();
+                          userInputStore.pressedHotKey('<ctrl>+c');
+                        },
+                      )
+                    ),
+                    Container(
+                      child: MaterialButton(
+                        color: Colors.blue,
+                        child: Text('ctrl+v'),
+                        onPressed: (){
+                          inputFocusNode.unfocus();
+                          userInputStore.pressedHotKey('<ctrl>+v');
+                        },
+                      )
+                    ),
+                    Container(
+                      child: MaterialButton(
+                        color: Colors.blue,
+                        child: Text('ctrl+z'),
+                        onPressed: (){
+                          inputFocusNode.unfocus();
+                          userInputStore.pressedHotKey('<ctrl>+z');
+                        },
+                      )
+                    ),
+                  ]
+                )
+              ),
+              Container(
+                padding: EdgeInsets.only(
+                  left: 10,
+                  right: 10
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      child: MaterialButton(
+                        color: Colors.blue,
+                        child: Text('esc'),
+                        onPressed: () {
+                          inputFocusNode.unfocus();
+                          userInputStore.pressedKey('esc');
+                        },
+                      )
+                    ),
+                    Container(
+                      child: MaterialButton(
+                        color: Colors.blue,
+                        child: Text('tab'),
+                        onPressed: (){
+                          inputFocusNode.unfocus();
+                          userInputStore.pressedKey('tab');
+                        },
+                      )
+                    ),
+                    Container(
                       child: MaterialButton(
                         color: Colors.blue,
                         child: Icon(Icons.space_bar),
                         onPressed: () {
                           inputFocusNode.unfocus();
+                          userInputStore.pressedKey('space');
                         },
                       )
                     ),
                     Container(
-                      padding: EdgeInsets.only(
-                        left: 10
-                      ),
                       child: MaterialButton(
                         color: Colors.blue,
                         child: Icon(Icons.backspace),
                         onPressed: () {
                           inputFocusNode.unfocus();
+                          userInputStore.pressedKey('backspace');
                         },
                       )
                     ),

@@ -44,8 +44,10 @@ abstract class _WsStore with Store {
 		print(e);
 	}
 	
+	@action
 	onWsDonw() {
 		print('disconnected');
+		connected = false;
 	}
 }
 
