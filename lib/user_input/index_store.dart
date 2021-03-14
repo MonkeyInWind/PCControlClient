@@ -11,6 +11,17 @@ abstract class _UserInputStore with Store {
 	num prevY = 0;
 	
 	@observable
+	bool holdingAlt = false;
+	@observable
+	bool holdingShift = false;
+	@observable
+	bool holdingOption = false;
+	@observable
+	bool holdingControl = false;
+	@observable
+	bool holdingCommand = false;
+	
+	@observable
 	String userInput = '';
 	
 	@action
@@ -19,7 +30,7 @@ abstract class _UserInputStore with Store {
 	}
 	
 	@action
-	userAction(Map<String, dynamic> data) {
+	mouseAction(Map<String, dynamic> data) {
 		var operation = data['operation'];
 
 		switch(operation) {

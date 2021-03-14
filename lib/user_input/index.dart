@@ -9,17 +9,233 @@ class UserInputPage extends StatelessWidget{
     FocusNode inputFocusNode = new FocusNode();
     
     return Scaffold(
-        body: Flex(
+        body: Observer(builder: (_) => Flex(
             direction: Axis.vertical,
             children: [
               Container(
-                padding: EdgeInsets.all(10),
                 child: Flex(
                   direction: Axis.horizontal,
                   children: [
                     Expanded(
                       flex: 1,
-                      child: Observer(builder: (_) => TextField(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border(
+                            right: BorderSide(
+                              width: 1,
+                              color: Colors.black12
+                            )
+                          )
+                        ),
+                        child: Wrap(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.only(
+                                left: 10,
+                                right: 10
+                              ),
+                              child: MaterialButton(
+                                color: Colors.blue,
+                                child: Text('esc'),
+                                onPressed: (){
+                                  inputFocusNode.unfocus();
+                                },
+                              )
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(
+                                left: 10,
+                                right: 10
+                              ),
+                              child: MaterialButton(
+                                color: Colors.blue,
+                                child: Text('shift'),
+                                onPressed: (){
+                                  inputFocusNode.unfocus();
+                                },
+                              )
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(
+                                left: 10,
+                                right: 10
+                              ),
+                              child: MaterialButton(
+                                color: Colors.blue,
+                                child: Text('control'),
+                                onPressed: (){
+                                  inputFocusNode.unfocus();
+                                },
+                              )
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(
+                                left: 10,
+                                right: 10
+                              ),
+                              child: MaterialButton(
+                                color: Colors.blue,
+                                child: Text('option'),
+                                onPressed: (){
+                                  inputFocusNode.unfocus();
+                                },
+                              )
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(
+                                left: 10,
+                                right: 10
+                              ),
+                              child: MaterialButton(
+                                color: Colors.blue,
+                                child: Text('alt'),
+                                onPressed: (){
+                                  inputFocusNode.unfocus();
+                                },
+                              )
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(
+                                left: 10,
+                                right: 10
+                              ),
+                              child: MaterialButton(
+                                color: Colors.blue,
+                                child: Text('command'),
+                                onPressed: (){
+                                  inputFocusNode.unfocus();
+                                },
+                              )
+                            ),
+                          ]
+                        )
+                      )
+                    ),
+                    Container(
+                      child: Row(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.only(
+                              left: 5,
+                              right: 5
+                            ),
+                            height: 60,
+                            width: 50,
+                            child: TextButton(
+                              child: Icon(Icons.keyboard_arrow_left),
+                              onPressed: () {
+                                inputFocusNode.unfocus();
+                              },
+                            ),
+                          ),
+                          Container(
+                            child: Column(
+                              children: [
+                                Container(
+                                  child: TextButton(
+                                    child: Icon(Icons.keyboard_arrow_up),
+                                    onPressed: () {
+                                      inputFocusNode.unfocus();
+                                    },
+                                  ),
+                                ),
+                                Container(
+                                  child: TextButton(
+                                    child: Text('Enter'),
+                                    onPressed: () {
+                                      inputFocusNode.unfocus();
+                                      userInputStore.pressedEnter();
+                                    }
+                                  )
+                                ),
+                                Container(
+                                  child: TextButton(
+                                    child: Icon(Icons.keyboard_arrow_down),
+                                    onPressed: () {
+                                      inputFocusNode.unfocus();
+                                    },
+                                  ),
+                                )
+                              ]
+                            )
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(
+                              left: 5,
+                              right: 5
+                            ),
+                            height: 60,
+                            width: 50,
+                            child: TextButton(
+                              child: Icon(Icons.keyboard_arrow_right),
+                              onPressed: () {
+                                inputFocusNode.unfocus();
+                              },
+                            ),
+                          )
+                        ]
+                      )
+                    )
+                  ],
+                )
+              ),
+              Container(
+                padding: EdgeInsets.only(
+                  left: 10,
+                  right: 10
+                ),
+                child: Flex(
+                  direction: Axis.horizontal,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.only(
+                        right: 10
+                      ),
+                      child: MaterialButton(
+                        color: Colors.blue,
+                        child: Icon(Icons.touch_app),
+                        onPressed: () {
+                          inputFocusNode.unfocus();
+                        },
+                      )
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: MaterialButton(
+                        color: Colors.blue,
+                        child: Icon(Icons.space_bar),
+                        onPressed: () {
+                          inputFocusNode.unfocus();
+                        },
+                      )
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(
+                        left: 10
+                      ),
+                      child: MaterialButton(
+                        color: Colors.blue,
+                        child: Icon(Icons.backspace),
+                        onPressed: () {
+                          inputFocusNode.unfocus();
+                        },
+                      )
+                    ),
+                  ]
+                )
+              ),
+              Container(
+                padding: EdgeInsets.only(
+                  left: 10,
+                  right: 10,
+                  bottom: 10
+                ),
+                child: Flex(
+                  direction: Axis.horizontal,
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: TextField(
                         focusNode: inputFocusNode,
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.all(10),
@@ -38,11 +254,10 @@ class UserInputPage extends StatelessWidget{
                           )
                         ),
                       ),
-                    )),
+                    ),
                     Container(
                       padding: EdgeInsets.only(
-                        left: 10,
-                        right: 10
+                        left: 10
                       ),
                       child: MaterialButton(
                         color: Colors.blue,
@@ -52,16 +267,6 @@ class UserInputPage extends StatelessWidget{
                           userInputStore.sendMessToPc();
                         },
                       ),
-                    ),
-                    Container(
-                      child: MaterialButton(
-                        color: Colors.blue,
-                        child: Text('Enter'),
-                        onPressed: () {
-                          inputFocusNode.unfocus();
-                          userInputStore.pressedEnter();
-                        }
-                      )
                     )
                   ]
                 )
@@ -77,19 +282,19 @@ class UserInputPage extends StatelessWidget{
                         ),
                         onTap: () {
                           if (!wsStore.connected) return;
-                          userInputStore.userAction({
+                          userInputStore.mouseAction({
                             'operation': 'tap'
                           });
                         },
                         onDoubleTap: () {
                           if (!wsStore.connected) return;
-                          userInputStore.userAction({
+                          userInputStore.mouseAction({
                             'operation': 'doubleTap'
                           });
                         },
                         onLongPress: () {
                           if (!wsStore.connected || userInputStore.isMoving) return;
-                          userInputStore.userAction({
+                          userInputStore.mouseAction({
                             'operation': 'longPress'
                           });
                         }
@@ -98,7 +303,7 @@ class UserInputPage extends StatelessWidget{
                       inputFocusNode.unfocus();
                       if (!wsStore.connected) return;
                       Offset offset = e.position;
-                      userInputStore.userAction({
+                      userInputStore.mouseAction({
                         'operation': 'pointerDown',
                         'prev': {
                           'x': offset.dx,
@@ -116,7 +321,7 @@ class UserInputPage extends StatelessWidget{
                         'disX': disX,
                         'disY': disY
                       };
-                      userInputStore.userAction({
+                      userInputStore.mouseAction({
                         'operation': 'move',
                         'axis': axis,
                         'prev': {
@@ -135,6 +340,7 @@ class UserInputPage extends StatelessWidget{
               )
             ]
         )
+      )
     );
   }
 }
