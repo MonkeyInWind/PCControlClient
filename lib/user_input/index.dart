@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:PCControlClient/components/Button.dart';
 import './../ws_store.dart';
 import 'index_store.dart';
 
@@ -29,83 +30,47 @@ class UserInputPage extends StatelessWidget{
                         ),
                         child: Wrap(
                           children: [
-                            Container(
-                              padding: EdgeInsets.only(
-                                left: 10,
-                                right: 10
-                              ),
-                              child: MaterialButton(
-                                color: Colors.blue,
-                                child: Icon(Icons.touch_app),
-                                onPressed: (){
-                                  inputFocusNode.unfocus();
-                                },
-                              )
+                            materialButton(
+                              padding: [0, 10, 0, 10],
+                              icon: Icons.touch_app,
+                              onPressed: (){
+                                inputFocusNode.unfocus();
+                              },
                             ),
-                            Container(
-                              padding: EdgeInsets.only(
-                                left: 10,
-                                right: 10
-                              ),
-                              child: MaterialButton(
-                                color: Colors.blue,
-                                child: Text('shift'),
-                                onPressed: (){
-                                  inputFocusNode.unfocus();
-                                },
-                              )
+                            materialButton(
+                              padding: [0, 10, 0, 0],
+                              text: 'shift',
+                              onPressed: (){
+                                inputFocusNode.unfocus();
+                              },
                             ),
-                            Container(
-                              padding: EdgeInsets.only(
-                                left: 10,
-                                right: 10
-                              ),
-                              child: MaterialButton(
-                                color: Colors.blue,
-                                child: Text('control'),
-                                onPressed: (){
-                                  inputFocusNode.unfocus();
-                                },
-                              )
+                            materialButton(
+                              padding: [0, 10, 0, 10],
+                              text: 'control',
+                              onPressed: (){
+                                inputFocusNode.unfocus();
+                              },
                             ),
-                            Container(
-                              padding: EdgeInsets.only(
-                                left: 10,
-                                right: 10
-                              ),
-                              child: MaterialButton(
-                                color: Colors.blue,
-                                child: Text('option'),
-                                onPressed: (){
-                                  inputFocusNode.unfocus();
-                                },
-                              )
+                            materialButton(
+                              padding: [0, 10, 0, 0],
+                              text: 'option',
+                              onPressed: (){
+                                inputFocusNode.unfocus();
+                              },
                             ),
-                            Container(
-                              padding: EdgeInsets.only(
-                                left: 10,
-                                right: 10
-                              ),
-                              child: MaterialButton(
-                                color: Colors.blue,
-                                child: Text('alt'),
-                                onPressed: (){
-                                  inputFocusNode.unfocus();
-                                },
-                              )
+                            materialButton(
+                              padding: [0, 10, 0, 10],
+                              text: 'alt',
+                              onPressed: (){
+                                inputFocusNode.unfocus();
+                              },
                             ),
-                            Container(
-                              padding: EdgeInsets.only(
-                                left: 10,
-                                right: 10
-                              ),
-                              child: MaterialButton(
-                                color: Colors.blue,
-                                child: Text('command'),
-                                onPressed: (){
-                                  inputFocusNode.unfocus();
-                                },
-                              )
+                            materialButton(
+                              padding: [0, 10, 0, 0],
+                              text: 'command',
+                              onPressed: (){
+                                inputFocusNode.unfocus();
+                              },
                             ),
                           ]
                         )
@@ -191,60 +156,45 @@ class UserInputPage extends StatelessWidget{
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
+                    materialButton(
                       width: 68,
-                      child: MaterialButton(
-                        color: Colors.blue,
-                        child: Text('ctrl+a'),
-                        onPressed: (){
-                          inputFocusNode.unfocus();
-                          userInputStore.pressedHotKey('cmd+a');
-                        },
-                      )
+                      text: 'ctrl+a',
+                      onPressed: (){
+                        inputFocusNode.unfocus();
+                        userInputStore.pressedHotKey('cmd+a');
+                      }
                     ),
-                    Container(
+                    materialButton(
                       width: 68,
-                      child: MaterialButton(
-                        color: Colors.blue,
-                        child: Text('ctrl+x'),
-                        onPressed: (){
-                          inputFocusNode.unfocus();
-                          userInputStore.pressedHotKey('cmd+x');
-                        },
-                      )
+                      text: 'ctrl+a',
+                      onPressed: (){
+                        inputFocusNode.unfocus();
+                        userInputStore.pressedHotKey('cmd+x');
+                      }
                     ),
-                    Container(
+                    materialButton(
                       width: 68,
-                      child: MaterialButton(
-                        color: Colors.blue,
-                        child: Text('ctrl+c'),
-                        onPressed: (){
-                          inputFocusNode.unfocus();
-                          userInputStore.pressedHotKey('cmd+c');
-                        },
-                      )
+                      text: 'ctrl+a',
+                      onPressed: (){
+                        inputFocusNode.unfocus();
+                        userInputStore.pressedHotKey('cmd+c');
+                      }
                     ),
-                    Container(
+                    materialButton(
                       width: 68,
-                      child: MaterialButton(
-                        color: Colors.blue,
-                        child: Text('ctrl+v'),
-                        onPressed: (){
-                          inputFocusNode.unfocus();
-                          userInputStore.pressedHotKey('cmd+v');
-                        },
-                      )
+                      text: 'ctrl+a',
+                      onPressed: (){
+                        inputFocusNode.unfocus();
+                        userInputStore.pressedHotKey('cmd+v');
+                      }
                     ),
-                    Container(
+                    materialButton(
                       width: 68,
-                      child: MaterialButton(
-                        color: Colors.blue,
-                        child: Text('ctrl+z'),
-                        onPressed: (){
-                          inputFocusNode.unfocus();
-                          userInputStore.pressedHotKey('cmd+z');
-                        },
-                      )
+                      text: 'ctrl+a',
+                      onPressed: (){
+                        inputFocusNode.unfocus();
+                        userInputStore.pressedHotKey('cmd+z');
+                      }
                     ),
                   ]
                 )
@@ -257,45 +207,33 @@ class UserInputPage extends StatelessWidget{
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      child: MaterialButton(
-                        color: Colors.blue,
-                        child: Text('esc'),
-                        onPressed: () {
-                          inputFocusNode.unfocus();
-                          userInputStore.pressedKey('esc');
-                        },
-                      )
+                    materialButton(
+                      text: 'esc',
+                      onPressed: (){
+                        inputFocusNode.unfocus();
+                        userInputStore.pressedKey('esc');
+                      }
                     ),
-                    Container(
-                      child: MaterialButton(
-                        color: Colors.blue,
-                        child: Text('tab'),
-                        onPressed: (){
-                          inputFocusNode.unfocus();
-                          userInputStore.pressedKey('tab');
-                        },
-                      )
+                    materialButton(
+                      text: 'tab',
+                      onPressed: (){
+                        inputFocusNode.unfocus();
+                        userInputStore.pressedKey('tab');
+                      }
                     ),
-                    Container(
-                      child: MaterialButton(
-                        color: Colors.blue,
-                        child: Icon(Icons.space_bar),
-                        onPressed: () {
-                          inputFocusNode.unfocus();
-                          userInputStore.pressedKey('space');
-                        },
-                      )
+                    materialButton(
+                      icon: Icons.space_bar,
+                      onPressed: (){
+                        inputFocusNode.unfocus();
+                        userInputStore.pressedKey('space');
+                      }
                     ),
-                    Container(
-                      child: MaterialButton(
-                        color: Colors.blue,
-                        child: Icon(Icons.backspace),
-                        onPressed: () {
-                          inputFocusNode.unfocus();
-                          userInputStore.pressedKey('backspace');
-                        },
-                      )
+                    materialButton(
+                      icon: Icons.backspace,
+                      onPressed: (){
+                        inputFocusNode.unfocus();
+                        userInputStore.pressedKey('backspace');
+                      }
                     ),
                   ]
                 )

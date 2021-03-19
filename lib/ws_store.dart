@@ -38,7 +38,7 @@ abstract class _WsStore with Store {
 	
 	onWsMessage(data) {
 		var received = json.decode(data);
-		if (!received['result']) {
+		if (!received || !received['result']) {
 			print(received);
 			return;
 		}
