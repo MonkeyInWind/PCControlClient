@@ -30,42 +30,42 @@ class UserInputPage extends StatelessWidget{
                         ),
                         child: Wrap(
                           children: [
-                            materialButton(
+                            Button(
                               padding: [0, 10, 0, 10],
                               icon: Icons.touch_app,
                               onPressed: (){
                                 inputFocusNode.unfocus();
                               },
                             ),
-                            materialButton(
+                            Button(
                               padding: [0, 10, 0, 0],
                               text: 'shift',
                               onPressed: (){
                                 inputFocusNode.unfocus();
                               },
                             ),
-                            materialButton(
+                            Button(
                               padding: [0, 10, 0, 10],
                               text: 'control',
                               onPressed: (){
                                 inputFocusNode.unfocus();
                               },
                             ),
-                            materialButton(
+                            Button(
                               padding: [0, 10, 0, 0],
                               text: 'option',
                               onPressed: (){
                                 inputFocusNode.unfocus();
                               },
                             ),
-                            materialButton(
+                            Button(
                               padding: [0, 10, 0, 10],
                               text: 'alt',
                               onPressed: (){
                                 inputFocusNode.unfocus();
                               },
                             ),
-                            materialButton(
+                            Button(
                               padding: [0, 10, 0, 0],
                               text: 'command',
                               onPressed: (){
@@ -156,7 +156,7 @@ class UserInputPage extends StatelessWidget{
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    materialButton(
+                    Button(
                       width: 68,
                       text: 'ctrl+a',
                       onPressed: (){
@@ -164,7 +164,7 @@ class UserInputPage extends StatelessWidget{
                         userInputStore.pressedHotKey('cmd+a');
                       }
                     ),
-                    materialButton(
+                    Button(
                       width: 68,
                       text: 'ctrl+a',
                       onPressed: (){
@@ -172,7 +172,7 @@ class UserInputPage extends StatelessWidget{
                         userInputStore.pressedHotKey('cmd+x');
                       }
                     ),
-                    materialButton(
+                    Button(
                       width: 68,
                       text: 'ctrl+a',
                       onPressed: (){
@@ -180,7 +180,7 @@ class UserInputPage extends StatelessWidget{
                         userInputStore.pressedHotKey('cmd+c');
                       }
                     ),
-                    materialButton(
+                    Button(
                       width: 68,
                       text: 'ctrl+a',
                       onPressed: (){
@@ -188,7 +188,7 @@ class UserInputPage extends StatelessWidget{
                         userInputStore.pressedHotKey('cmd+v');
                       }
                     ),
-                    materialButton(
+                    Button(
                       width: 68,
                       text: 'ctrl+a',
                       onPressed: (){
@@ -207,28 +207,28 @@ class UserInputPage extends StatelessWidget{
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    materialButton(
+                    Button(
                       text: 'esc',
                       onPressed: (){
                         inputFocusNode.unfocus();
                         userInputStore.pressedKey('esc');
                       }
                     ),
-                    materialButton(
+                    Button(
                       text: 'tab',
                       onPressed: (){
                         inputFocusNode.unfocus();
                         userInputStore.pressedKey('tab');
                       }
                     ),
-                    materialButton(
+                    Button(
                       icon: Icons.space_bar,
                       onPressed: (){
                         inputFocusNode.unfocus();
                         userInputStore.pressedKey('space');
                       }
                     ),
-                    materialButton(
+                    Button(
                       icon: Icons.backspace,
                       onPressed: (){
                         inputFocusNode.unfocus();
