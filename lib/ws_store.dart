@@ -1,6 +1,7 @@
 import 'package:mobx/mobx.dart';
 import 'package:web_socket_channel/io.dart';
 import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 import './setting/index_store.dart';
 
 part 'ws_store.g.dart';
@@ -16,7 +17,7 @@ abstract class _WsStore with Store {
 	bool connected = false;
 	
 	@action
-	connectToggle() {
+	connectToggle() async {
 		if (!connected) {
 			String ip = settingStore.inputIp;
 			String port = settingStore.inputPort;
@@ -26,6 +27,9 @@ abstract class _WsStore with Store {
 			channel = IOWebSocketChannel.connect(Uri.parse(address));
 			print('connected');
 			channel.stream.listen(onWsMessage, onError: onWsError, onDone: onWsDown);
+			SharedPreferences prefs = await SharedPreferences.getInstance();
+			prefs.setString('ip', ip);
+			prefs.setString('port', port);
 		} else {
 			channel.sink.close();
 		}

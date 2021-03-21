@@ -23,6 +23,7 @@ class PCController extends StatelessWidget {
 
 class MainContainer extends StatelessWidget {
   Widget build(BuildContext context) {
+    mainStore.init();
     return Observer(builder: (_) => Scaffold(
       appBar: AppBar(
         leading: Icon(

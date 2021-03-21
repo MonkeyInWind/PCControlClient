@@ -8,7 +8,6 @@ class SettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     FocusNode ipFocusNode = new FocusNode();
     FocusNode portFocusNode = new FocusNode();
-
     return Scaffold(
       body: GestureDetector(
         behavior: HitTestBehavior.translucent,
