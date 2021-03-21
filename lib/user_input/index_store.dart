@@ -9,6 +9,29 @@ abstract class _UserInputStore with Store {
 	bool isMoving = false;
 	num prevX = 0;
 	num prevY = 0;
+	List fcKeys = [
+		'drag',
+		'shift',
+		'control',
+		'option',
+		'alt',
+		'command'
+	];
+
+	List hotKeys = [
+		'ctrl+a',
+		'ctrl+c',
+		'ctrl+x',
+		'ctrl+v',
+		'ctrl+z'
+	];
+
+	List underLineKeys = [
+		'esc',
+		'tab',
+		'space',
+		'backspace'
+	];
 	
 	@observable
 	bool holdingAlt = false;

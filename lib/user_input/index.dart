@@ -8,7 +8,48 @@ class UserInputPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     FocusNode inputFocusNode = new FocusNode();
-    
+    List<Widget> fcKeyList = [];
+    List<Widget> hotKeyList = [];
+    List<Widget> underLineKeyList = [];
+
+    for(var i = 0; i < userInputStore.fcKeys.length; i++) {
+      double paddingRight = i % 2 == 1 ? 0 : 10;
+      fcKeyList.add(CButton(
+        padding: [0, 10, 0, paddingRight],
+        icon: userInputStore.fcKeys[i] == 'drag' ? Icons.touch_app : null,
+        text: userInputStore.fcKeys[i] != 'drag' ? userInputStore.fcKeys[i] : '',
+        onPressed: (){
+          inputFocusNode.unfocus();
+        },
+      ));
+    }
+
+    for(var i = 0; i < userInputStore.hotKeys.length; i++) {
+      String key = userInputStore.hotKeys[i];
+      hotKeyList.add(CButton(
+          width: 68,
+          text: key,
+          onPressed: (){
+            inputFocusNode.unfocus();
+            userInputStore.pressedHotKey(key);
+          }
+      ));
+    }
+
+    for(var i = 0; i < userInputStore.underLineKeys.length; i++) {
+      String key = userInputStore.underLineKeys[i];
+      IconData icon;
+      if (key == 'space') icon = Icons.space_bar;
+      if (key == 'backspace') icon = Icons.backspace;
+      underLineKeyList.add(CButton(
+          icon: icon,
+          text: icon == null ? key : '',
+          onPressed: (){
+            inputFocusNode.unfocus();
+            userInputStore.pressedKey(key);
+          }
+      ));
+    }
     return Scaffold(
         body: Observer(builder: (_) => Flex(
             direction: Axis.vertical,
@@ -29,50 +70,7 @@ class UserInputPage extends StatelessWidget{
                           )
                         ),
                         child: Wrap(
-                          children: [
-                            Button(
-                              padding: [0, 10, 0, 10],
-                              icon: Icons.touch_app,
-                              onPressed: (){
-                                inputFocusNode.unfocus();
-                              },
-                            ),
-                            Button(
-                              padding: [0, 10, 0, 0],
-                              text: 'shift',
-                              onPressed: (){
-                                inputFocusNode.unfocus();
-                              },
-                            ),
-                            Button(
-                              padding: [0, 10, 0, 10],
-                              text: 'control',
-                              onPressed: (){
-                                inputFocusNode.unfocus();
-                              },
-                            ),
-                            Button(
-                              padding: [0, 10, 0, 0],
-                              text: 'option',
-                              onPressed: (){
-                                inputFocusNode.unfocus();
-                              },
-                            ),
-                            Button(
-                              padding: [0, 10, 0, 10],
-                              text: 'alt',
-                              onPressed: (){
-                                inputFocusNode.unfocus();
-                              },
-                            ),
-                            Button(
-                              padding: [0, 10, 0, 0],
-                              text: 'command',
-                              onPressed: (){
-                                inputFocusNode.unfocus();
-                              },
-                            ),
-                          ]
+                          children: fcKeyList
                         )
                       )
                     ),
@@ -155,48 +153,7 @@ class UserInputPage extends StatelessWidget{
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Button(
-                      width: 68,
-                      text: 'ctrl+a',
-                      onPressed: (){
-                        inputFocusNode.unfocus();
-                        userInputStore.pressedHotKey('cmd+a');
-                      }
-                    ),
-                    Button(
-                      width: 68,
-                      text: 'ctrl+a',
-                      onPressed: (){
-                        inputFocusNode.unfocus();
-                        userInputStore.pressedHotKey('cmd+x');
-                      }
-                    ),
-                    Button(
-                      width: 68,
-                      text: 'ctrl+a',
-                      onPressed: (){
-                        inputFocusNode.unfocus();
-                        userInputStore.pressedHotKey('cmd+c');
-                      }
-                    ),
-                    Button(
-                      width: 68,
-                      text: 'ctrl+a',
-                      onPressed: (){
-                        inputFocusNode.unfocus();
-                        userInputStore.pressedHotKey('cmd+v');
-                      }
-                    ),
-                    Button(
-                      width: 68,
-                      text: 'ctrl+a',
-                      onPressed: (){
-                        inputFocusNode.unfocus();
-                        userInputStore.pressedHotKey('cmd+z');
-                      }
-                    ),
-                  ]
+                  children: hotKeyList
                 )
               ),
               Container(
@@ -206,36 +163,7 @@ class UserInputPage extends StatelessWidget{
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Button(
-                      text: 'esc',
-                      onPressed: (){
-                        inputFocusNode.unfocus();
-                        userInputStore.pressedKey('esc');
-                      }
-                    ),
-                    Button(
-                      text: 'tab',
-                      onPressed: (){
-                        inputFocusNode.unfocus();
-                        userInputStore.pressedKey('tab');
-                      }
-                    ),
-                    Button(
-                      icon: Icons.space_bar,
-                      onPressed: (){
-                        inputFocusNode.unfocus();
-                        userInputStore.pressedKey('space');
-                      }
-                    ),
-                    Button(
-                      icon: Icons.backspace,
-                      onPressed: (){
-                        inputFocusNode.unfocus();
-                        userInputStore.pressedKey('backspace');
-                      }
-                    ),
-                  ]
+                  children: underLineKeyList
                 )
               ),
               Container(

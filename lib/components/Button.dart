@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Button extends StatelessWidget {
+class CButton extends StatelessWidget {
   final double width;
   final String text;
   final IconData icon;
   final List<double> padding;
   final VoidCallback onPressed;
   final Color color;
-  Button({
+  CButton({
     Key key,
     this.width,
     this.text,
