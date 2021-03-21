@@ -34,6 +34,12 @@ class MainContainer extends StatelessWidget {
           color: Colors.blue,
           child: Text(mainStore.mainTitle),
         ),
+        actions: [
+          IconButton(
+            onPressed: mainStore.scan,
+            icon: Icon(Icons.center_focus_strong)
+          )
+        ]
       ),
       body: mainStore.currentPage,
       bottomNavigationBar: BottomNavigationBar(

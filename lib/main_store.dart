@@ -23,6 +23,7 @@ abstract class _MainStore with Store {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String ip = prefs.getString('ip');
     String port = prefs.getString('port');
+    if (ip == null || port == null) return;
     settingStore.ipChange(ip);
     settingStore.portChange(port);
   }
@@ -44,6 +45,10 @@ abstract class _MainStore with Store {
     currentIndex = index;
     mainTitle = titleList[index];
     currentPage = pageList[index];
+  }
+
+  void scan() async {
+    print('scan');
   }
 }
 
