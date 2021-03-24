@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'main_store.dart';
 import 'ws_store.dart';
+import './components/qr_scanner.dart';
 
 void main() {
   runApp(PCController());
@@ -36,8 +37,16 @@ class MainContainer extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: mainStore.scan,
-            icon: Icon(Icons.center_focus_strong)
+            icon: Icon(Icons.center_focus_strong),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  fullscreenDialog: true,
+                  builder: (context) => QrScanner()
+                )
+              );
+            }
           )
         ]
       ),
