@@ -1,29 +1,22 @@
-import 'dart:io';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter/foundation.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'dart:io';
+import 'index_store.dart';
 
 class QrScanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    QRViewController controller;
     final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
     //此回调是专门为了开发调试而提供的，在热重载(hot reload)时会被调用，此回调在Release模式下永远不会被调用
     @override
     void reassemble() {
       if (Platform.isAndroid) {
-        controller.pauseCamera();
+        qrScannerStore.controller.pauseCamera();
       }
-      controller.resumeCamera();
-    }
-
-    void _onQRViewCreated(QRViewController controller) {
-      controller = controller;
-      controller.scannedDataStream.listen((scanData) {
-        print(describeEnum(scanData.format));
-        print(scanData.code);
-      });
+      qrScannerStore.controller.resumeCamera();
     }
 
     var scanArea = (MediaQuery.of(context).size.width < 500 ||
@@ -36,7 +29,7 @@ class QrScanner extends StatelessWidget {
         Container(
           child: QRView(
             key: qrKey,
-            onQRViewCreated: _onQRViewCreated,
+            onQRViewCreated: qrScannerStore.QRViewCreated,
             overlay: QrScannerOverlayShape(
                 borderColor: Colors.blue,
                 borderRadius: 10,
@@ -60,15 +53,15 @@ class QrScanner extends StatelessWidget {
         Positioned(
           width: 60,
           height: 60,
-          bottom: 150,
+          bottom: 140,
           left: MediaQuery.of(context).size.width / 2 - 30,
           child: TextButton(
             child: Icon(
               Icons.highlight,
               size: 40,
             ),
-            onPressed: () {
-
+            onPressed: () async {
+              await qrScannerStore.controller.toggleFlash();
             },
           )
         )

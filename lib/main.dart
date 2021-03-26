@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'main_store.dart';
 import 'ws_store.dart';
-import './components/qr_scanner.dart';
+import 'qr_code_scanner/index.dart';
 
 void main() {
   runApp(PCController());
