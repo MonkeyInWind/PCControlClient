@@ -21,6 +21,7 @@ abstract class _QRScannerStore with Store {
   @action
   qrViewCreated(QRViewController qrController) {
     controller = qrController;
+    if (wsStore.connected) wsStore.connectToggle();
     controller.scannedDataStream.listen((scanData) {
       if (describeEnum(scanData.format) != 'qrcode') return;
       String address = scanData.code;

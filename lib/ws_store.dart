@@ -3,6 +3,7 @@ import 'package:web_socket_channel/io.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import './setting/index_store.dart';
+import './home/index_store.dart';
 
 part 'ws_store.g.dart';
 
@@ -50,8 +51,7 @@ abstract class _WsStore with Store {
 		var receivedData = received['data'];
 		switch(received['type']) {
 			case 'system_info':
-				String platform = receivedData['platform'];
-				print(platform);
+				homeStore.setDeviceInfo(receivedData);
 				break;
 			default:
 				break;

@@ -46,10 +46,6 @@ abstract class _MainStore with Store {
     mainTitle = titleList[index];
     currentPage = pageList[index];
   }
-
-  void scan() async {
-    print('scan');
-  }
 }
 
 final mainStore = MainStore();
